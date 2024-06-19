@@ -9,11 +9,57 @@ class Arr {
         return this.tailIndex === this.lastArrayIndex;
     }
 
+    isEmpty() {
+        return this.tailIndex === -1;
+    }
+
+    getSize() {
+        return this.size;
+    }
+
+    getTailIndex() {
+        return this.tailIndex;
+    }
+
+    getElementAtIndex(index) {
+        return this.arr[index];
+    }
+
+    getRaw() {
+        // deep clone
+        return JSON.parse(JSON.stringify(this.arr));
+    }
+
     insert(value) {
         if(this.isFull()) {
             throw new Error('Array is full.');
         }
         this.arr[++this.tailIndex] = value;
+    }
+
+    insertAtBeginningWithoutRightShift(value) {
+        if (this.isEmpty()) {
+            this.arr[++this.tailIndex] = value;
+        } else {
+            this.arr[0] = value;
+        }
+    }
+
+    insertAtBeginningWithRightShift(value) {
+        if (this.isEmpty()) {
+            this.arr[++this.tailIndex] = value;
+            return;
+        }
+
+        if (!this.isFull()) {
+            this.tailIndex++;
+        }
+
+        for (let i = this.tailIndex; i >= 1; i--) {
+            this.arr[i] = this.arr[i - 1];
+        }
+
+        this.arr[0] = value;
     }
 
     traverse() {

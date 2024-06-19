@@ -64,4 +64,64 @@ describe('Testing Array', () => {
             expect(console.log).toHaveBeenNthCalledWith(3, 10);
         });
     });
+
+    describe('Testing insertAtBeginningWithoutRightShift', () => {
+        it('should be able to insert at the 0th index even if the array has no element', () => {
+            const arr = new Arr(3);
+
+            expect(arr.isEmpty()).toBeTruthy();
+            expect(arr.getTailIndex()).toBe(-1);
+
+            arr.insertAtBeginningWithoutRightShift(10);
+
+            expect(arr.isEmpty()).toBeFalsy();
+            expect(arr.getTailIndex()).toBe(0);
+        });
+
+        it('should be able to insert at the 0th index even if the array has some elements', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+
+            expect(arr.getElementAtIndex(0)).toBe(10);
+            expect(arr.getTailIndex()).toBe(2);
+
+            arr.insertAtBeginningWithoutRightShift(100);
+
+            expect(arr.getTailIndex()).toBe(2);
+            expect(arr.getElementAtIndex(0)).toBe(100);
+        });
+    });
+
+    describe('Testing insertAtBeginningWithRightShift', () => {
+        it('should only insert the new element at 0th index when array is empty', () => {
+            const arr = new Arr(5);
+
+            expect(arr.isEmpty()).toBeTruthy();
+            expect(arr.getTailIndex()).toBe(-1);
+
+            arr.insertAtBeginningWithRightShift(10);
+
+            expect(arr.getElementAtIndex(0)).toBe(10);
+            expect(arr.getTailIndex()).toBe(0);
+        });
+
+        it('should insert the new element at 0th index and also right shift the existing elements', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+
+            expect(arr.getTailIndex()).toBe(0);
+
+            arr.insertAtBeginningWithRightShift(100);
+
+            expect(arr.getTailIndex()).toBe(1);
+            expect(arr.getRaw()).toStrictEqual([100, 10, null]);
+
+            arr.insertAtBeginningWithRightShift(200);
+
+            expect(arr.getTailIndex()).toBe(2);
+            expect(arr.getRaw()).toStrictEqual([200, 100, 10]);
+        });
+    });
 });

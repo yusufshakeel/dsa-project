@@ -100,7 +100,7 @@ class Arr {
         if (this.isEmpty()) {
             throw new Error('Array is empty.');
         }
-        
+
         if (index < 0 || index > this.lastArrayIndex) {
             throw new Error('Invalid index.');
         }
@@ -129,6 +129,18 @@ class Arr {
     reverseTraverse() {
         for(let i = this.tailIndex; i >= 0; i--) {
             console.log(this.arr[i]);
+        }
+    }
+
+    reverse() {
+        if (this.isEmpty()) {
+            throw new Error('Array is empty.');
+        }
+        
+        for(let start = 0, end = this.tailIndex; start < end; start++, end--) {
+            const temp = this.arr[start];
+            this.arr[start] = this.arr[end];
+            this.arr[end] = temp;
         }
     }
 }

@@ -273,4 +273,26 @@ describe('Testing Array', () => {
             expect(arr.getTailIndex()).toBe(1);
         });
     });
+
+    describe('Testing reverse', () => {
+        it('should throw error if array is empty', () => {
+            const arr = new Arr(3);
+            expect(() => arr.reverse()).toThrow('Array is empty.');
+        });
+
+        it('should be able to reverse array of odd size', () => {
+            const arr = new Arr(5);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+            arr.insert(40);
+            arr.insert(50);
+            
+            expect(arr.getRaw()).toStrictEqual([10,20,30,40,50]);
+
+            arr.reverse();
+
+            expect(arr.getRaw()).toStrictEqual([50,40,30,20,10]);
+        });
+    });
 });

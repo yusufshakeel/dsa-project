@@ -31,7 +31,7 @@ describe('Testing Array', () => {
             expect(() => arr.insert(20)).not.toThrow();
             expect(() => arr.insert(30)).not.toThrow();
             expect(arr.isFull()).toBeTruthy();
-            expect(() => arr.insert(40)).toThrow();
+            expect(() => arr.insert(40)).toThrow('Array is full.');
         });
     });
 
@@ -122,6 +122,61 @@ describe('Testing Array', () => {
 
             expect(arr.getTailIndex()).toBe(2);
             expect(arr.getRaw()).toStrictEqual([200, 100, 10]);
+        });
+
+        it('should insert the new element at 0th index and also right shift the existing elements even when the array is full', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+
+            expect(arr.getTailIndex()).toBe(2);
+            expect(arr.getRaw()).toStrictEqual([10, 20, 30]);
+
+            arr.insertAtBeginningWithRightShift(100);
+
+            expect(arr.getTailIndex()).toBe(2);
+            expect(arr.getRaw()).toStrictEqual([100, 10, 20]);
+        });
+    });
+
+    describe('Testing insertAtIndex', () => {
+        it('should throw an error if index is less than 0', () => {
+            const arr = new Arr(3);
+            expect(() => arr.insertAtIndex(-100, 10)).toThrow('Invalid index.');
+        });
+
+        it('should throw an error if index is greater than last index of the array', () => {
+            const arr = new Arr(3);
+            expect(() => arr.insertAtIndex(10, 10)).toThrow('Invalid index.');
+        });
+
+        it('should be able to insert value at the given index', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+            
+            expect(arr.getRaw()).toStrictEqual([10, 20, 30]);
+            expect(arr.getTailIndex()).toBe(2);
+
+            arr.insertAtIndex(1, 100);
+            
+            expect(arr.getRaw()).toStrictEqual([10, 100, 30]);
+            expect(arr.getTailIndex()).toBe(2);
+        });
+
+        it('should be able to insert value at the given index and update the tail index', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            
+            expect(arr.getRaw()).toStrictEqual([10, null, null]);
+            expect(arr.getTailIndex()).toBe(0);
+
+            arr.insertAtIndex(2, 100);
+            
+            expect(arr.getRaw()).toStrictEqual([10, null, 100]);
+            expect(arr.getTailIndex()).toBe(2);
         });
     });
 });

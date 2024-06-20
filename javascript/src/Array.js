@@ -13,10 +13,6 @@ class Arr {
         return this.tailIndex === -1;
     }
 
-    getSize() {
-        return this.size;
-    }
-
     getTailIndex() {
         return this.tailIndex;
     }
@@ -60,6 +56,18 @@ class Arr {
         }
 
         this.arr[0] = value;
+    }
+
+    insertAtIndex(index, value) {
+        if (index < 0 || index > this.lastArrayIndex) {
+            throw new Error('Invalid index.');
+        }
+        
+        this.arr[index] = value;
+
+        if (this.tailIndex < index) {
+            this.tailIndex = index;
+        }
     }
 
     traverse() {

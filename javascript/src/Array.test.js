@@ -179,4 +179,26 @@ describe('Testing Array', () => {
             expect(arr.getTailIndex()).toBe(2);
         });
     });
+
+    describe('Testing delete', () => {
+        it('should throw error if array is empty', () => {
+            const arr = new Arr(3);
+            expect(() => arr.delete()).toThrow('Array is empty.');
+        });
+
+        it('should be able to delete the last element of the array', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+
+            expect(arr.getRaw()).toStrictEqual([10, 20, 30]);
+            expect(arr.getTailIndex()).toBe(2);
+
+            arr.delete();
+
+            expect(arr.getRaw()).toStrictEqual([10, 20, null]);
+            expect(arr.getTailIndex()).toBe(1);
+        });
+    });
 });

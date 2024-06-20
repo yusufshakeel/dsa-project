@@ -70,6 +70,16 @@ class Arr {
         }
     }
 
+    delete() {
+        if (this.isEmpty()) {
+            throw new Error('Array is empty.');
+        }
+
+        const removedElement = this.arr[this.tailIndex];
+        this.arr[this.tailIndex--] = null;
+        return removedElement;
+    }
+
     traverse() {
         for(let i = 0; i <= this.tailIndex; i++) {
             console.log(this.arr[i]);

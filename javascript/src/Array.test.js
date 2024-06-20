@@ -195,9 +195,81 @@ describe('Testing Array', () => {
             expect(arr.getRaw()).toStrictEqual([10, 20, 30]);
             expect(arr.getTailIndex()).toBe(2);
 
-            arr.delete();
+            const item = arr.delete();
+
+            expect(item).toBe(30);
 
             expect(arr.getRaw()).toStrictEqual([10, 20, null]);
+            expect(arr.getTailIndex()).toBe(1);
+        });
+    });
+
+    describe('Testing deleteFromBeginning', () => {
+        it('should throw error if array is empty', () => {
+            const arr = new Arr(3);
+            expect(() => arr.deleteFromBeginning()).toThrow('Array is empty.');
+        });
+
+        it('should be able to delete the first element of the array', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+
+            expect(arr.getRaw()).toStrictEqual([10, 20, 30]);
+            expect(arr.getTailIndex()).toBe(2);
+
+            const item = arr.deleteFromBeginning();
+
+            expect(item).toBe(10);
+
+            expect(arr.getRaw()).toStrictEqual([20, 30, null]);
+            expect(arr.getTailIndex()).toBe(1);
+        });
+    });
+
+    describe('Testing deleteAtIndex', () => {
+        it('should throw error if array is empty', () => {
+            const arr = new Arr(3);
+            expect(() => arr.deleteAtIndex()).toThrow('Array is empty.');
+        });
+
+        it('should throw an error if index is less than 0', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+            expect(() => arr.deleteAtIndex(-100)).toThrow('Invalid index.');
+        });
+
+        it('should throw an error if index is greater than last index of the array', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+            expect(() => arr.deleteAtIndex(10)).toThrow('Invalid index.');
+        });
+
+        it('should throw an error if index is greater than tail index', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            expect(() => arr.deleteAtIndex(2)).toThrow('Provided index is greater than tail index.');
+        });
+
+        it('should be able to delete the element at the given index', () => {
+            const arr = new Arr(3);
+            arr.insert(10);
+            arr.insert(20);
+            arr.insert(30);
+
+            expect(arr.getRaw()).toStrictEqual([10, 20, 30]);
+            expect(arr.getTailIndex()).toBe(2);
+
+            const item = arr.deleteAtIndex(1);
+
+            expect(item).toBe(20);
+
+            expect(arr.getRaw()).toStrictEqual([10, 30, null]);
             expect(arr.getTailIndex()).toBe(1);
         });
     });

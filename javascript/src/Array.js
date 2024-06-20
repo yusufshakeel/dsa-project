@@ -75,9 +75,49 @@ class Arr {
             throw new Error('Array is empty.');
         }
 
-        const removedElement = this.arr[this.tailIndex];
+        const deletedElement = this.arr[this.tailIndex];
         this.arr[this.tailIndex--] = null;
-        return removedElement;
+        return deletedElement;
+    }
+
+    deleteFromBeginning() {
+        if (this.isEmpty()) {
+            throw new Error('Array is empty.');
+        }
+
+        const deletedElement = this.arr[0];
+
+        for(let i = 1; i <= this.tailIndex; i++) {
+            this.arr[i - 1] = this.arr[i];
+        }
+
+        this.arr[this.tailIndex--] = null;
+
+        return deletedElement;
+    }
+
+    deleteAtIndex(index) {
+        if (this.isEmpty()) {
+            throw new Error('Array is empty.');
+        }
+        
+        if (index < 0 || index > this.lastArrayIndex) {
+            throw new Error('Invalid index.');
+        }
+
+        if (index > this.tailIndex) {
+            throw new Error('Provided index is greater than tail index.');
+        }
+
+        const deletedElement = this.arr[index];
+
+        for(let i = index + 1; i <= this.tailIndex; i++) {
+            this.arr[i - 1] = this.arr[i];
+        }
+
+        this.arr[this.tailIndex--] = null;
+
+        return deletedElement;
     }
 
     traverse() {

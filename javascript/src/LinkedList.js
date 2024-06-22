@@ -71,6 +71,22 @@ class LinkedList {
     return temp;
   }
 
+  removeFromBeginning() {
+    if (this.isEmpty()) {
+      throw new Error("LinkedList is empty.");
+    }
+
+    const temp = this.head;
+    this.head = this.head.next;
+    this.size--;
+
+    if (this.size === 0) {
+      this.tail = null;
+    }
+
+    return temp;
+  }
+
   traverse() {
     if (this.isEmpty()) {
       throw new Error("LinkedList is empty.");

@@ -49,6 +49,34 @@ describe("Testing LinkedList", () => {
     });
   });
 
+  describe("Testing removeFromBeginning", () => {
+    it("should be able to remove node", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+
+      expect(ll.removeFromBeginning().value).toBe(10);
+      expect(ll.getSize()).toBe(2);
+
+      expect(ll.removeFromBeginning().value).toBe(20);
+      expect(ll.getSize()).toBe(1);
+
+      expect(ll.removeFromBeginning().value).toBe(30);
+      expect(ll.getSize()).toBe(0);
+    });
+
+    it("should throw error when trying to remove node from an empty linked list", () => {
+      const ll = new LinkedList(10);
+
+      expect(ll.getSize()).toBe(1);
+      expect(() => ll.removeFromBeginning()).not.toThrow();
+      expect(ll.getSize()).toBe(0);
+      expect(() => ll.removeFromBeginning()).toThrow("LinkedList is empty.");
+    });
+  });
+
   describe("Testing traverse", () => {
     it("should be able to traverse", () => {
       const ll = new LinkedList(10);

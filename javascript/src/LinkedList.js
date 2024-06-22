@@ -28,6 +28,21 @@ class LinkedList {
     this.size++;
   }
 
+  insertAtBeginning(value) {
+    const node = new LLNode(value);
+
+    if (this.isEmpty()) {
+      this.head = node;
+      this.tail = this.head;
+      this.size = 1;
+      return;
+    }
+
+    node.next = this.head;
+    this.head = node;
+    this.size++;
+  }
+
   remove() {
     if (this.isEmpty()) {
       throw new Error("LinkedList is empty.");
@@ -45,6 +60,9 @@ class LinkedList {
     this.tail.next = null;
     this.size--;
 
+    // if there is only one node in the linked list.
+    // then after we remove it, the size will be zero.
+    // hence we will set both head and tail as null.
     if (this.size === 0) {
       this.head = null;
       this.tail = null;

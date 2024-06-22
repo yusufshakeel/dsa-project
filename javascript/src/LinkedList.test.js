@@ -5,6 +5,10 @@ describe("Testing LinkedList", () => {
     jest.spyOn(console, "log");
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe("Testing insert", () => {
     it("should be able to insert new node", () => {
       const ll = new LinkedList(10);
@@ -62,6 +66,30 @@ describe("Testing LinkedList", () => {
       ll.remove();
       expect(ll.getSize()).toBe(0);
       expect(() => ll.traverse()).toThrow("LinkedList is empty.");
+    });
+  });
+
+  describe("Testing insertAtBeginning", () => {
+    it("should be able to insert a new node at the beginning", () => {
+      const ll = new LinkedList(10);
+      ll.insertAtBeginning(20);
+      ll.traverse();
+
+      expect(ll.getSize()).toBe(2);
+      expect(console.log).toHaveBeenCalledTimes(2);
+      expect(console.log).toHaveBeenNthCalledWith(1, 20);
+      expect(console.log).toHaveBeenNthCalledWith(2, 10);
+    });
+
+    it("should be able to insert a new node at the beginning even when linked list is empty", () => {
+      const ll = new LinkedList(10);
+      ll.remove();
+      ll.insertAtBeginning(20);
+      ll.traverse();
+
+      expect(ll.getSize()).toBe(1);
+      expect(console.log).toHaveBeenCalledTimes(1);
+      expect(console.log).toHaveBeenNthCalledWith(1, 20);
     });
   });
 });

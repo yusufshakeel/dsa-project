@@ -84,6 +84,7 @@ class LinkedList {
       this.tail = null;
     }
 
+    temp.next = null;
     return temp;
   }
 

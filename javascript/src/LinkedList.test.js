@@ -140,4 +140,28 @@ describe("Testing LinkedList", () => {
       expect(ll.get(1).value).toBe(20);
     });
   });
+
+  describe("Testing set", () => {
+    it("should throw error if index is invalid", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+      expect(() => ll.set(-10, 100)).toThrow("Invalid index.");
+      expect(() => ll.set(4, 100)).toThrow("Invalid index.");
+    });
+
+    it("should be able to set value at a given index", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+
+      ll.set(1, 100);
+
+      expect(ll);
+    });
+  });
 });

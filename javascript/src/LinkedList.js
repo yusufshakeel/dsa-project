@@ -99,6 +99,19 @@ class LinkedList {
       temp = temp.next;
     }
   }
+
+  get(index) {
+    if (index < 0 || index >= this.size) {
+      throw new Error("Invalid index.");
+    }
+
+    let temp = this.head;
+    for (let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+
+    return temp;
+  }
 }
 
 module.exports = { LLNode, LinkedList };

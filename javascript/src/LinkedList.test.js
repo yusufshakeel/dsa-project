@@ -120,4 +120,24 @@ describe("Testing LinkedList", () => {
       expect(console.log).toHaveBeenNthCalledWith(1, 20);
     });
   });
+
+  describe("Testing get", () => {
+    it("should throw error if index is invalid", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+      expect(() => ll.get(-10)).toThrow("Invalid index.");
+      expect(() => ll.get(4)).toThrow("Invalid index.");
+    });
+
+    it("should be able to get value at the given index", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.get(1).value).toBe(20);
+    });
+  });
 });

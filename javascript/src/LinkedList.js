@@ -21,6 +21,17 @@ class LinkedList {
     return this.size;
   }
 
+  getValues() {
+    const values = [];
+    let temp = this.head;
+    while (temp) {
+      values.push(temp.value);
+      temp = temp.next;
+    }
+    return values;
+  }
+
+  // push, append, insert at the end
   insert(value) {
     const node = new LLNode(value);
     this.tail.next = node;
@@ -28,6 +39,31 @@ class LinkedList {
     this.size++;
   }
 
+  insertAtIndex(index, value) {
+    if (index < 0 || index >= this.size) {
+      throw new Error("Invalid index.");
+    }
+
+    // prepend
+    if (index === 0) {
+      this.insertAtBeginning(value);
+    }
+    // insert in the middle
+    else {
+      const node = new LLNode(value);
+      let temp = this.head;
+      let current = this.head;
+      for (let i = 0; i < index; i++) {
+        current = temp;
+        temp = temp.next;
+      }
+      current.next = node;
+      node.next = temp;
+      this.size++;
+    }
+  }
+
+  // prepend, unshift
   insertAtBeginning(value) {
     const node = new LLNode(value);
 
@@ -43,6 +79,7 @@ class LinkedList {
     this.size++;
   }
 
+  // pop, remove from the end
   remove() {
     if (this.isEmpty()) {
       throw new Error("LinkedList is empty.");
@@ -71,6 +108,7 @@ class LinkedList {
     return temp;
   }
 
+  // shift
   removeFromBeginning() {
     if (this.isEmpty()) {
       throw new Error("LinkedList is empty.");

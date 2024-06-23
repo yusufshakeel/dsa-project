@@ -164,4 +164,55 @@ describe("Testing LinkedList", () => {
       expect(ll);
     });
   });
+
+  describe("Testing insertAtIndex", () => {
+    it("should throw error if index is invalid", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+      expect(() => ll.insertAtIndex(-10, 100)).toThrow("Invalid index.");
+      expect(() => ll.insertAtIndex(4, 100)).toThrow("Invalid index.");
+    });
+
+    it("should be able to insert at the beginning", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+
+      ll.insertAtIndex(0, 100);
+
+      expect(ll.getSize()).toBe(4);
+      expect(ll.getValues()).toStrictEqual([100, 10, 20, 30]);
+    });
+
+    it("should be able to insert at the end", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+
+      ll.insertAtIndex(2, 100);
+
+      expect(ll.getSize()).toBe(4);
+      expect(ll.getValues()).toStrictEqual([10, 20, 100, 30]);
+    });
+
+    it("should be able to insert between start and end index", () => {
+      const ll = new LinkedList(10);
+      ll.insert(20);
+      ll.insert(30);
+
+      expect(ll.getSize()).toBe(3);
+
+      ll.insertAtIndex(1, 100);
+
+      expect(ll.getSize()).toBe(4);
+      expect(ll.getValues()).toStrictEqual([10, 100, 20, 30]);
+    });
+  });
 });

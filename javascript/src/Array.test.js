@@ -87,7 +87,7 @@ describe('Testing Array', () => {
             expect(arr.getRaw()).toStrictEqual([40, 10, 20]);
         });
 
-        it('should be able to insert at 0th index when array is full empty', () => {
+        it('should be able to insert at 0th index when array is full', () => {
             const arr = new Arr(3);
             arr.insert(10);
             arr.insert(20);

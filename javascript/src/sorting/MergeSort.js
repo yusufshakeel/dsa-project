@@ -22,6 +22,18 @@ class MergeSort {
         }
         return result;
     }
+
+    sort(arr) {
+        if(arr.length === 1) {
+            return arr;
+        }
+
+        const midIndex = Math.floor(arr.length / 2);
+        const leftSubArray = this.sort(arr.slice(0, midIndex));
+        const rightSubArray = this.sort(arr.slice(midIndex));
+
+        return this.merge(leftSubArray, rightSubArray);
+    }
 }
 
 module.exports = { MergeSort };

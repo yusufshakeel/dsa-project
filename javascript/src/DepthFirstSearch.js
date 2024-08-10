@@ -28,6 +28,21 @@ class DepthFirstSearch {
         traverse(temp);
         return result;
     }
+
+    inOrderTraversal(binarySearchTree) {
+        let temp = binarySearchTree.getRoot();
+        if (temp === null) {
+            return [];
+        }
+        let result = [];
+        const traverse = (node) => {
+            if (node.left) traverse(node.left);
+            result.push(node.value);
+            if (node.right) traverse(node.right);
+        };
+        traverse(temp);
+        return result;
+    }
 }
 
 module.exports = { DepthFirstSearch };

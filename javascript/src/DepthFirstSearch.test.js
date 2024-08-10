@@ -42,4 +42,21 @@ describe('Depth First Search', () => {
             expect(dfs.postOrderTraversal(bst)).toStrictEqual([10,30,20,50,80,70,40]);
         });
     });
+
+    describe('In order traversal', () => {
+        it('should return empty array if binary search tree is empty', () => {
+            expect(dfs.inOrderTraversal(bst)).toStrictEqual([]);
+        });
+
+        it('should return in order traversal result for non-empty binary search tree', () => {
+            bst.insert(40);
+            bst.insert(20);
+            bst.insert(70);
+            bst.insert(10);
+            bst.insert(30);
+            bst.insert(50);
+            bst.insert(80);
+            expect(dfs.inOrderTraversal(bst)).toStrictEqual([10,20,30,40,50,70,80]);
+        });
+    });
 });

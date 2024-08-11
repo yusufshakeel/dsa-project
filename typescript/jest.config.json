@@ -1,0 +1,17 @@
+{
+  "testEnvironment": "node",
+  "verbose": true,
+  "bail": true,
+  "testRegex": "test.(js|ts)$",
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/**/*.{ts,tsx}",
+    "!**/coverage/**",
+    "!**/dist/**",
+    "!**/node_modules/**",
+    "!**/test/**"
+  ]
+}
